@@ -73,29 +73,11 @@ Please refer to file `Project_B.py` for this section. I tried different combinat
 The code for my perspective transform includes a function called `corners_unwarp(img, src, dst)`, which appears in lines 13 through 21 in the file `Project_B.py`.  The `corners_unwarp()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose to hardcode the source and destination points in the following manner (code line 312 to 322):
 
 ```python
-    img_size = (img.shape[1], img.shape[0])
-    w1 = 0.20
-    w2 = 0.46
-    w3 = 0.54
-    w4 = 0.82
-    h1 = 0.94
-    h2 = 0.62
-    offset = img_size[0]*0.25
-    src = np.float32([(img_size[0]*w2, img_size[1]*h2),(img_size[0]*w3, img_size[1]*h2),(img_size[0]*w4, img_size[1]*h1), (img_size[0]*w1, img_size[1]*h1)])
-    dst = np.float32([(offset, 0), (img_size[0]-offset, 0), (img_size[0]-offset, img_size[1]), (offset, img_size[1])])
-
+    src = np.float32([[578, 460], [180, 720], [1127, 720], [703, 460]])
+    dst = np.float32([[320, 0], [320, 720], [960, 720], [960, 0]])
     warped, Minv = corners_unwarp(preprocessImg, src, dst)
 
 ```
-
-This resulted in the following source and destination points:
-
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 595, 460      | 250, 0        | 
-| 595, 460      | 1065, 0       |
-| 1125, 700     | 1065, 720     |
-| 280, 700      | 250, 720      |
  
 
 I verified that my perspective transform was working as expected in all test images by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
